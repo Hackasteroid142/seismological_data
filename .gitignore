@@ -15,10 +15,10 @@
 /backend/config/credentials/*.key
 
 # Ignore all logfiles and tempfiles.
-/backend/log/*
-/backend/tmp/*
-!/backend/log/.keep
-!/backend/tmp/.keep
+./backend/log/*
+./backend/tmp/*
+!./backend/log/.keep
+!./backend/tmp/.keep
 
 # Ignore pidfiles, but keep the directory.
 /backend/tmp/pids/*

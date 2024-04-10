@@ -22,6 +22,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_023133) do
     t.float "longitude", null: false
     t.float "latitude", null: false
     t.float "magnitude", null: false
+    t.string "externalId"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

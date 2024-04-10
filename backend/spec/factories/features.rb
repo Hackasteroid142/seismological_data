@@ -11,5 +11,6 @@ FactoryBot.define do
     longitude { -122.8093338 }
     latitude { 38.831501 }
     magnitude { 1.98 }
+    externalId { "nc74032311" }
   end
 end

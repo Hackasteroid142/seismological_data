@@ -11,6 +11,7 @@ class CreateFeatures < ActiveRecord::Migration[7.1]
       t.float :longitude, null: false
       t.float :latitude, null: false
       t.float :magnitude, null: false
+      t.string :externalId
 
       t.timestamps
     end

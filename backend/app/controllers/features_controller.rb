@@ -5,7 +5,32 @@ class FeaturesController < ApplicationController
   def index
     @features = Feature.all
 
-    render json: @features
+    @features = @features.by_magType(filter_params[:magType]) if filter_params[:magType].present?
+
+    feature_data = @features.map do |feature|
+      {
+        id: feature.id,
+        type: "feature",
+        attributes: {
+          external_id: feature.externalId,
+          magnitude: feature.magnitude,
+          place: feature.place,
+          time: Time.at(feature.time / 1000),
+          tsunami: !!feature.tsunami,
+          mag_type: feature.magType,
+          title: feature.title,
+          coordinates: {
+            longitude: feature.longitude,
+            latitude: feature.latitude
+          }
+        },
+        links: {
+          external_url: feature.url,
+        }
+      }
+    end
+
+    render json: { data: feature_data }
   end
 
   # GET /features/1
@@ -44,8 +69,13 @@ class FeaturesController < ApplicationController
       @feature = Feature.find(params[:id])
     end
 
+    def filter_params
+      params.permit(:magType)
+    end
+
     # Only allow a list of trusted parameters through.
     def feature_params
+      puts params.inspect
       params.require(:feature).permit(:mag, :place, :time, :url, :tsunami, :magType, :title, :longitude, :latitude)
     end
 end

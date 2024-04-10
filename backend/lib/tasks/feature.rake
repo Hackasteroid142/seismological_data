@@ -18,7 +18,8 @@ namespace :feature do
                 title: featureProperties["title"],
                 longitude: featureGeometry["coordinates"][0],
                 latitude: featureGeometry["coordinates"][1],
-                magnitude: featureGeometry["coordinates"][2]
+                magnitude: featureGeometry["coordinates"][2],
+                externalId: feature["id"]
             )
         end
     end
