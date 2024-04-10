@@ -21,6 +21,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_10_023133) do
     t.string "title", null: false
     t.float "longitude", null: false
     t.float "latitude", null: false
+    t.float "magnitude", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

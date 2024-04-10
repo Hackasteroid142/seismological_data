@@ -8,7 +8,7 @@ namespace :feature do
             featureProperties = feature["properties"]
             featureGeometry = feature["geometry"]
 
-            Feature.create(
+            Feature.find_or_create_by(
                 mag: featureProperties["mag"], 
                 place: featureProperties["place"], 
                 time: featureProperties["time"], 
@@ -18,7 +18,7 @@ namespace :feature do
                 title: featureProperties["title"],
                 longitude: featureGeometry["coordinates"][0],
                 latitude: featureGeometry["coordinates"][1],
-                magnitud: featureGeometry["coordinates"][2]
+                magnitude: featureGeometry["coordinates"][2]
             )
         end
     end
