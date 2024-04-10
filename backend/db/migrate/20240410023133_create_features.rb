@@ -2,14 +2,15 @@ class CreateFeatures < ActiveRecord::Migration[7.1]
   def change
     create_table :features do |t|
       t.float :mag
-      t.string :place
+      t.string :place, null: false
       t.integer :time
-      t.string :url
+      t.string :url, null: false
       t.integer :tsunami
-      t.string :magType
-      t.string :title
-      t.float :longitude
-      t.float :latitude
+      t.string :magType, null: false
+      t.string :title, null: false
+      t.float :longitude, null: false
+      t.float :latitude, null: false
+      t.float :magnitude, null: false
 
       t.timestamps
     end

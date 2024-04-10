@@ -13,14 +13,14 @@
 ActiveRecord::Schema[7.1].define(version: 2024_04_10_023133) do
   create_table "features", force: :cascade do |t|
     t.float "mag"
-    t.string "place"
+    t.string "place", null: false
     t.integer "time"
-    t.string "url"
+    t.string "url", null: false
     t.integer "tsunami"
-    t.string "magType"
-    t.string "title"
-    t.float "longitude"
-    t.float "latitude"
+    t.string "magType", null: false
+    t.string "title", null: false
+    t.float "longitude", null: false
+    t.float "latitude", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
