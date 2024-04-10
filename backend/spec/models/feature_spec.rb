@@ -8,4 +8,10 @@ RSpec.describe Feature, type: :model do
       expect(feature).to be_valid
     end
   end
+
+  describe "scope" do
+    it "filter by magType" do
+      expect(Feature.by_magType("md")).to include(feature)
+    end
+  end
 end
