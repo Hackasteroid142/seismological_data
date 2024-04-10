@@ -29,3 +29,4 @@
 !/backend/storage/.keep
 /backend/tmp/storage/*
 !/backend/tmp/storage/.keep
+/backend/tmp/*
