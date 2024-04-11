@@ -1,5 +1,8 @@
 class Feature < ApplicationRecord
     MAX_PER_PAGE = 1000
+
+    has_many :comments
+
     validates :place, :url, :magType, :title, :longitude, :latitude, :magnitude, presence: true
     validates :longitude, numericality: { less_than_or_egual_to: 180, greater_than_or_equal_to: -180 }
     validates :latitude, numericality: { less_than_or_egual_to: 90, greater_than_or_equal_to: -90 }

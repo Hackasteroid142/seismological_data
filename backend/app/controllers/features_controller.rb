@@ -1,5 +1,5 @@
 class FeaturesController < ApplicationController
-  before_action :set_feature, only: %i[ show update destroy ]
+  before_action :set_feature, only: %i[ show update destroy create_comment ]
 
   # GET /features
   def index
@@ -70,6 +70,16 @@ class FeaturesController < ApplicationController
     @feature.destroy!
   end
 
+  def create_comment
+    @comment = @feature.comments.new(content: params[:body])
+
+    if @comment.save
+      render json: @comment, status: :created, location: @comment
+    else
+      render json: @comment.errors, status: :unprocessable_entity
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_feature
@@ -82,7 +92,6 @@ class FeaturesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def feature_params
-      puts params.inspect
       params.require(:feature).permit(:mag, :place, :time, :url, :tsunami, :magType, :title, :longitude, :latitude)
     end
 end
