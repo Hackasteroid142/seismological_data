@@ -3,9 +3,7 @@ class FeaturesController < ApplicationController
 
   # GET /features
   def index
-    @features = Feature.all
-
-    @features = @features.by_magType(filter_params[:magType]) if filter_params[:magType].present?
+    @features = Feature.filter_features(filter_params)
 
     feature_data = @features.map do |feature|
       {
@@ -30,7 +28,16 @@ class FeaturesController < ApplicationController
       }
     end
 
-    render json: { data: feature_data }
+    response = {
+      data: feature_data,
+      pagination: {
+        current_page: filter_params[:page].to_i,
+        total: feature_data.count,
+        per_page: filter_params[:per_page].to_i,
+      }
+    }
+
+    render json: response
   end
 
   # GET /features/1
@@ -70,7 +77,7 @@ class FeaturesController < ApplicationController
     end
 
     def filter_params
-      params.permit(:magType)
+      params.permit(:magType, :page, :per_page)
     end
 
     # Only allow a list of trusted parameters through.

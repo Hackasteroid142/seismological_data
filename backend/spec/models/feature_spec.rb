@@ -14,4 +14,12 @@ RSpec.describe Feature, type: :model do
       expect(Feature.by_magType("md")).to include(feature)
     end
   end
+
+  describe "methods" do
+    it "should filter features" do
+      features = Feature.filter_features({ page: "1", per_page: "3"})
+
+      expect(features.count).to be(1)
+    end
+  end
 end
