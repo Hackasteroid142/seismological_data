@@ -19,8 +19,8 @@
         :model-value="itemsPerPage"
         class="pa-2"
         label="Items per page"
-        max="15"
-        min="-1"
+        max="1000"
+        min="1"
         type="number"
         hide-details
         @update:model-value="updateFeaturesByItemsPerPage($event)"
@@ -34,17 +34,20 @@
         persistent-hint
       ></v-select>
     </template>
-
     <template v-slot:[`item.actions`]="{ item }">
-      <v-btn size="small" @click="deleteItem(item)"> Crear comentario </v-btn>
+      <commentary-card :id="item.id"></commentary-card>
     </template>
   </v-data-table>
 </template>
 
 <script>
 import featureService from "@/services/featureService.js";
+import CommentaryCard from "./CommentaryCard.vue";
 
 export default {
+  components: {
+    CommentaryCard,
+  },
   data() {
     return {
       page: 1,
@@ -119,19 +122,14 @@ export default {
   },
 
   watch: {
-    selectedFilters(newValue, oldValue) {
-      console.log(oldValue)
+    selectedFilters(newValue) {
       this.updateFeaturesByMagType(newValue);
-    }
+    },
   },
 
   methods: {
-    deleteItem(item) {
-      console.log(item);
-    },
     async updateFeaturesByItemsPerPage(itemsPerPage) {
-      console.log(itemsPerPage);
-      if (itemsPerPage) {
+      if (itemsPerPage && itemsPerPage < 1001) {
         this.itemsPerPage = parseInt(itemsPerPage, 10);
         let result = await featureService.getFeatures(
           this.page,
@@ -140,8 +138,8 @@ export default {
         this.items = result.data;
       }
     },
+
     async updateFeaturesByPage(page) {
-      console.log(page);
       if (page) {
         this.page = parseInt(page, 10);
         let result = await featureService.getFeatures(
@@ -153,8 +151,7 @@ export default {
     },
 
     async updateFeaturesByMagType(magType) {
-      console.log(magType);
-      if(magType){
+      if (magType) {
         const magTypeString = magType.toString();
         let result = await featureService.getFeatures(
           this.page,
