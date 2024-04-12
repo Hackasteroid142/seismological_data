@@ -1,6 +1,7 @@
 namespace :feature do 
     desc "Lectura de feature"
     task get_feature: :environment do
+        puts "Iniciando obtención de Features"
         response = Faraday.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson")
         body = JSON.parse(response.body)
 
@@ -22,5 +23,7 @@ namespace :feature do
                 externalId: feature["id"]
             )
         end
+
+        puts "Obtención de Features finalizado"
     end
 end
