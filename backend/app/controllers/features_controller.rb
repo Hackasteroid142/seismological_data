@@ -71,6 +71,11 @@ class FeaturesController < ApplicationController
   end
 
   def create_comment
+    if params[:body].blank?
+      render json: { error: "El cuerpo del comentario no puede estar vacío" }, status: :unprocessable_entity
+      return
+    end
+    
     @comment = @feature.comments.new(content: params[:body])
 
     if @comment.save

@@ -35,7 +35,7 @@
       ></v-select>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
-      <commentary-card :id="item.id"></commentary-card>
+      <commentary-card :idItem="item.id"></commentary-card>
     </template>
   </v-data-table>
 </template>
