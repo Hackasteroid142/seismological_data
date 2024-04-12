@@ -1,5 +1,5 @@
 <template>
-  <Home msg="Welcome to Your Vue.js App"/>
+  <Home class="test" msg="Welcome to Your Vue.js App"/>
 </template>
 
 <script>
@@ -20,6 +20,15 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+body, html {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  min-height: 100vh;
+}
+body {
+  background-color: #0a809e;
 }
 </style>

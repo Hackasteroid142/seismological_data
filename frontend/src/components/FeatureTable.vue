@@ -6,33 +6,41 @@
     :items-per-page="itemsPerPage"
   >
     <template v-slot:top>
-      <v-text-field
-        :model-value="page"
-        class="pa-2"
-        label="Page"
-        type="number"
-        hide-details
-        @update:model-value="updateFeaturesByPage($event)"
-      ></v-text-field>
+      <v-container>
+        <v-row>
+          <v-col>
+            <v-text-field
+              :model-value="page"
+              label="Página"
+              type="number"
+              hide-details
+              @update:model-value="updateFeaturesByPage($event)"
+            ></v-text-field>
+          </v-col>
 
-      <v-text-field
-        :model-value="itemsPerPage"
-        class="pa-2"
-        label="Items per page"
-        max="1000"
-        min="1"
-        type="number"
-        hide-details
-        @update:model-value="updateFeaturesByItemsPerPage($event)"
-      ></v-text-field>
+          <v-col>
+            <v-text-field
+              :model-value="itemsPerPage"
+              label="Items por página"
+              max="1000"
+              min="1"
+              type="number"
+              hide-details
+              @update:model-value="updateFeaturesByItemsPerPage($event)"
+            ></v-text-field>
+          </v-col>
 
-      <v-select
-        v-model="selectedFilters"
-        :items="filters"
-        label="Mag Type"
-        multiple
-        persistent-hint
-      ></v-select>
+          <v-col>
+            <v-select
+              v-model="selectedFilters"
+              :items="filters"
+              label="Mag Type"
+              multiple
+              persistent-hint
+            ></v-select>
+          </v-col>
+        </v-row>
+      </v-container>
     </template>
     <template v-slot:[`item.actions`]="{ item }">
       <commentary-card :idItem="item.id"></commentary-card>
@@ -51,12 +59,12 @@ export default {
   data() {
     return {
       page: 1,
-      itemsPerPage: 20,
+      itemsPerPage: 15,
       headers: [
         {
           align: "center",
           title: "External ID",
-          key: "attributes.external_id",
+          key: "attributes.external_id"
         },
         {
           align: "center",
@@ -129,7 +137,7 @@ export default {
 
   methods: {
     async updateFeaturesByItemsPerPage(itemsPerPage) {
-      if (itemsPerPage && itemsPerPage < 1001) {
+      if (itemsPerPage && itemsPerPage < 1001 && itemsPerPage > 0) {
         this.itemsPerPage = parseInt(itemsPerPage, 10);
         let result = await featureService.getFeatures(
           this.page,
@@ -164,3 +172,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.bold-text {
+  font-weight: 800px;
+}
+</style>

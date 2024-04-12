@@ -2,6 +2,12 @@ class FeaturesController < ApplicationController
   before_action :set_feature, only: %i[ show update destroy create_comment ]
 
   # GET /features
+  # 
+  # @param { number } page Número de página que se desea ver
+  # @param { number } perPage Cantidad de features por página
+  # @param { string } magType filtro para buscar por tipo de mag
+  # 
+  # @return { object} Features encontradas según filtros aplicados
   def index
     @features = Feature.filter_features(filter_params)
 
@@ -70,12 +76,15 @@ class FeaturesController < ApplicationController
     @feature.destroy!
   end
 
+  # POST /features/:id/comment
+  #
+  # @param { string } body Texto con el contenido del comentario
   def create_comment
     if params[:body].blank?
       render json: { error: "El cuerpo del comentario no puede estar vacío" }, status: :unprocessable_entity
       return
     end
-    
+
     @comment = @feature.comments.new(content: params[:body])
 
     if @comment.save

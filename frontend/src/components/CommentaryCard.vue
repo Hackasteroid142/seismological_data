@@ -61,7 +61,6 @@ export default {
 
   methods: {
     async createComment() {
-      console.log(this.idItem, this.comment);
       if (this.comment) {
         await featureService.createComment(this.idItem, this.comment);
         this.dialog = false;

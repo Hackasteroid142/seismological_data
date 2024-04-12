@@ -10,6 +10,13 @@ class Feature < ApplicationRecord
 
     scope :by_magType, -> (magType) { where(magType: magType) }
 
+    # Aplica filtros para búsqueda de Features
+    #
+    # @param { number } page Número de página que se desea ver
+    # @param { number } perPage Cantidad de features por página
+    # @param { string } magType filtro para buscar por tipo de mag
+    # 
+    # @return { object} Features encontradas según filtros aplicados
     def self.filter_features(params)
         per_page = params[:per_page].to_i
         page = params[:page].to_i

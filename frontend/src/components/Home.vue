@@ -1,6 +1,19 @@
 <template>
   <div class="hello">
-    <FeatureTable />
+    <v-container>
+      <v-row>
+        <v-col>
+          <div class="text-h1 text-center">Datos sismológicos de USGS</div>
+        </v-col>
+      </v-row>
+      <v-row>
+        <v-col>
+          <v-card>
+            <FeatureTable />
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
@@ -8,14 +21,14 @@
 import FeatureTable from "./FeatureTable.vue";
 
 export default {
-  name: 'HelloWorld',
+  name: "HelloWorld",
   components: {
-    FeatureTable
+    FeatureTable,
   },
   props: {
-    msg: String
-  }
-}
+    msg: String,
+  },
+};
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
@@ -33,5 +46,9 @@ li {
 }
 a {
   color: #42b983;
+}
+
+.text-h1 {
+  color: white;
 }
 </style>
